@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://diu87nu54hft5"]
 
 [node name="testing_level" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(50, 1, 50)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.877874, 0.478891, 0, -0.478891, 0.877874, 0, 29.2687, 0)
