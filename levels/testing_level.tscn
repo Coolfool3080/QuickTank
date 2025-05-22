@@ -11,5 +11,5 @@ size = Vector3(50, 1, 50)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.877874, 0.478891, 0, -0.478891, 0.877874, 0, 29.2687, 0)
 
-[node name="tank" parent="." instance=ExtResource("1_m2onx")]
+[node name="player_tank" parent="." instance=ExtResource("1_m2onx")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
