@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://di137jxkg0i6h"]
 
-[ext_resource type="Script" uid="uid://bsi88enr6xl7w" path="res://assets/player_tank.gd" id="1_x57s6"]
-[ext_resource type="Script" uid="uid://1syxfwp1riao" path="res://assets/camera_controller.gd" id="2_pdhg8"]
+[ext_resource type="Script" uid="uid://bsi88enr6xl7w" path="res://scripts/player_tank.gd" id="1_x57s6"]
+[ext_resource type="Script" uid="uid://1syxfwp1riao" path="res://scripts/camera_controller.gd" id="2_pdhg8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ugdkx"]
 size = Vector3(1.50146, 1, 1)
@@ -16,9 +16,11 @@ size = Vector3(0.502808, 0.348206, 0.55127)
 [sub_resource type="BoxMesh" id="BoxMesh_pdhg8"]
 
 [node name="tank" type="CharacterBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_x57s6")
 
 [node name="tank_body" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_ugdkx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="tank_body"]
@@ -27,7 +29,7 @@ mesh = SubResource("BoxMesh_ugdkx")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248596, 0.674103, 0.00219727)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.674, 0.166)
 shape = SubResource("BoxShape3D_x57s6")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
@@ -40,7 +42,8 @@ transform = Transform3D(0.883216, 0, 0, 0, 0.082872, 0, 0, 0, 0.0970361, 0.69275
 mesh = SubResource("BoxMesh_pdhg8")
 
 [node name="Camera_Controller" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("2_pdhg8")
 
 [node name="Camera3D" type="Camera3D" parent="Camera_Controller"]
-transform = Transform3D(-0.0132749, 0.247303, -0.968847, 0.00338817, 0.968938, 0.24728, 0.999906, -4.65618e-10, -0.0137005, -4, 2, 0)
+transform = Transform3D(-0.0139622, 0.246975, -0.968921, 0, 0.969016, 0.246999, 0.999903, 0.00344865, -0.0135296, -4, 2, 0)
