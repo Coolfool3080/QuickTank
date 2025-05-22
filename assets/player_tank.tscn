@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://di137jxkg0i6h"]
+
+[ext_resource type="Script" uid="uid://bsi88enr6xl7w" path="res://assets/player_tank.gd" id="1_x57s6"]
+[ext_resource type="Script" uid="uid://1syxfwp1riao" path="res://assets/camera_controller.gd" id="2_pdhg8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ugdkx"]
+size = Vector3(1.50146, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ugdkx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x57s6"]
+size = Vector3(0.502808, 0.348206, 0.55127)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x57s6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pdhg8"]
+
+[node name="tank" type="CharacterBody3D"]
+script = ExtResource("1_x57s6")
+
+[node name="tank_body" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ugdkx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tank_body"]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_ugdkx")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248596, 0.674103, 0.00219727)
+shape = SubResource("BoxShape3D_x57s6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(0.504323, 0, 0, 0, 0.343149, 0, 0, 0, 0.5417, 0, 0, 0)
+mesh = SubResource("BoxMesh_x57s6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(0.883216, 0, 0, 0, 0.082872, 0, 0, 0, 0.0970361, 0.692755, 0, 0)
+mesh = SubResource("BoxMesh_pdhg8")
+
+[node name="Camera_Controller" type="Node3D" parent="."]
+script = ExtResource("2_pdhg8")
+
+[node name="Camera3D" type="Camera3D" parent="Camera_Controller"]
+transform = Transform3D(-0.0132749, 0.247303, -0.968847, 0.00338817, 0.968938, 0.24728, 0.999906, -4.65618e-10, -0.0137005, -4, 2, 0)
