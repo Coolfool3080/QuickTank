@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=4 uid="uid://dqt54bsbk8lsw"]
+
+[ext_resource type="Texture2D" uid="uid://c6c3alyl4j0pn" path="res://assets/mesh/blender/Cube Base Color.png" id="1_2m7ux"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ie75c"]
+resource_name = "Material.002"
+cull_mode = 2
+albedo_texture = ExtResource("1_2m7ux")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_igmem"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5mxdc"]
+resource_name = "ground_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("6lIUrWoClP1qAhSt6lKU/epSv1dqAj+oagK/V+pSP6g/qBStv1eU/b9XFK0/qJT9P6i/V79XP6i/V79XP6g/qOpS6lJqAmoC6lJqAmoC6lI/qOpSv1dqAj+oagK/V+pS"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_ie75c"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAABU1f//AAD//1TV//8AAAAAVNUAAAAA//9U1f////8AAFTVAAD/////VNUAAP//AABU1f///////1TVVFWqqlRVqqpUVaqqVFWqqv8//7//P/+//z//v/8//7+qqlRVqqpUVaqqVFWqqlRV/3//f/9//3//f/9//3//f1RVVFVUVVRVVFVUVVRVVFVU1aoqVNWqKlTVqipU1aoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_igmem")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_coys5"]
+points = PackedVector3Array(1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1)
+
+[node name="meshy_setup" type="Node3D"]
+
+[node name="ground" type="Node3D" parent="."]
+
+[node name="Cube" type="MeshInstance3D" parent="ground"]
+mesh = SubResource("ArrayMesh_5mxdc")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ground/Cube"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground/Cube/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_coys5")
