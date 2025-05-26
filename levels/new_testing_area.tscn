@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbauh3gep264s"]
+[gd_scene load_steps=3 format=3 uid="uid://b578lh0najia4"]
 
 [ext_resource type="MeshLibrary" uid="uid://uc0w8dauwqu0" path="res://assets/mesh/mesh_library_2.tres" id="1_bohuh"]
 [ext_resource type="PackedScene" uid="uid://di137jxkg0i6h" path="res://assets/player_tank.tscn" id="2_cekmb"]

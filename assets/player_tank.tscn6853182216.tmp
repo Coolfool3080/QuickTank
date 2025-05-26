@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://di137jxkg0i6h"]
+[gd_scene load_steps=8 format=3 uid="uid://di137jxkg0i6h"]
 
 [ext_resource type="Script" uid="uid://caysg58cfc8q4" path="res://scripts/tank.gd" id="1_pdhg8"]
 [ext_resource type="Script" uid="uid://16isgl7p7bja" path="res://assets/tank_head.gd" id="2_5mdrw"]
 [ext_resource type="Script" uid="uid://1syxfwp1riao" path="res://scripts/camera_controller.gd" id="2_pdhg8"]
-[ext_resource type="Script" uid="uid://bifruna43f14n" path="res://assets/look_node.gd" id="4_2idtm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ugdkx"]
 size = Vector3(1.50146, 1, 1)
@@ -13,8 +12,6 @@ size = Vector3(1.50146, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_x57s6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pdhg8"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_2idtm"]
 
 [node name="player_tank" type="Node3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -45,18 +42,13 @@ skeleton = NodePath("../../..")
 transform = Transform3D(0.883216, 0, 0, 0, 0.082872, 0, 0, 0, 0.0970361, 0.692755, 0, 0)
 mesh = SubResource("BoxMesh_pdhg8")
 
-[node name="camera_controller" type="Node3D" parent="tank"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+[node name="camera_controller" type="Node3D" parent="." groups=["camera_controller"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("2_pdhg8")
 
-[node name="Camera3D" type="Camera3D" parent="tank/camera_controller"]
+[node name="Camera3D" type="Camera3D" parent="camera_controller"]
 transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.2222e-08, -4, 2, 0)
 current = true
 
-[node name="look_node" type="Node3D" parent="tank/camera_controller"]
+[node name="look_at" type="Node3D" parent="camera_controller"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.7, 3.93403e-07)
-script = ExtResource("4_2idtm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="tank/camera_controller/look_node"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_2idtm")
