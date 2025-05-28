@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://di137jxkg0i6h"]
+[gd_scene load_steps=9 format=3 uid="uid://di137jxkg0i6h"]
 
 [ext_resource type="Script" uid="uid://caysg58cfc8q4" path="res://scripts/tank.gd" id="1_pdhg8"]
 [ext_resource type="Script" uid="uid://1syxfwp1riao" path="res://scripts/camera_controller.gd" id="2_pdhg8"]
@@ -14,6 +14,14 @@ size = Vector3(0.502808, 0.348206, 0.55127)
 [sub_resource type="BoxMesh" id="BoxMesh_x57s6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pdhg8"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pdhg8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="player_tank" type="Node3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -43,6 +51,9 @@ skeleton = NodePath("../../..")
 [node name="tank_barrel_model" type="MeshInstance3D" parent="tank/tank_head_phys_box"]
 transform = Transform3D(0.883216, 0, 0, 0, 0.082872, 0, 0, 0, 0.0970361, 0.692755, 0, 0)
 mesh = SubResource("BoxMesh_pdhg8")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="tank"]
+replication_config = SubResource("SceneReplicationConfig_pdhg8")
 
 [node name="camera_controller" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

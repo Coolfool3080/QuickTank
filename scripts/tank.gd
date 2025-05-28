@@ -4,13 +4,19 @@ const MOVE_SPEED = 5
 const ROTATION_SPEED = 1
 
 func _physics_process(delta):
-	#Add the gravity.
+	
+
+	if not is_multiplayer_authority():
+		return
+
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
+	# Input
 	var rotation_dir = Input.get_axis("tank_rotate_right", "tank_rotate_left")
 	var movement_dir = Input.get_axis("tank_backward", "tank_forward")
-	
+
 	if Input.is_action_pressed("tank_forward"):
 		rotate_y(rotation_dir * delta)
 		velocity = global_transform.basis.z.normalized() * MOVE_SPEED
