@@ -40,8 +40,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_igmem")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_coys5"]
-points = PackedVector3Array(1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_2m7ux"]
+margin = 0.241
+size = Vector3(2.02448, 2.00635, 2.03998)
 
 [node name="meshy_setup" type="Node3D"]
 
@@ -54,4 +55,5 @@ skeleton = NodePath("")
 [node name="StaticBody3D" type="StaticBody3D" parent="ground/Cube"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ground/Cube/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_coys5")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00253296, -0.00146484, 0.00485229)
+shape = SubResource("BoxShape3D_2m7ux")

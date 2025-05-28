@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwcj6tvnfkhin"]
+[gd_scene load_steps=9 format=3 uid="uid://cwcj6tvnfkhin"]
 
 [ext_resource type="Script" uid="uid://cb50wd0o4yo1b" path="res://assets/tank_movement_controller.gd" id="1_mxk3p"]
 
@@ -6,36 +6,64 @@
 size = Vector3(1, 1, 1.50195)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mxk3p"]
+size = Vector3(1, 1, 1.5)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_5hjg4"]
-height = 0.276642
-radius = 0.434082
+[sub_resource type="BoxShape3D" id="BoxShape3D_mxk3p"]
+size = Vector3(1.01218, 1, 1.51746)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_a2myn"]
+height = 0.28
 
-[sub_resource type="BoxMesh" id="BoxMesh_ym7mu"]
+[sub_resource type="BoxMesh" id="BoxMesh_5hjg4"]
+size = Vector3(0.15, 0.15, 1)
 
-[node name="player_tank_new" type="CharacterBody3D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a2myn"]
+height = 0.28067
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mxk3p"]
+
+[node name="Tank" type="CharacterBody3D"]
 script = ExtResource("1_mxk3p")
 
-[node name="Body" type="CollisionShape3D" parent="."]
+[node name="movement_collider" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_vaebi")
 
-[node name="Body_mesh" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0, 0)
+[node name="body_mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_mxk3p")
+skeleton = NodePath("../movement_collider")
 
-[node name="Head" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.643647, 0)
-shape = SubResource("CylinderShape3D_5hjg4")
+[node name="body_hitbox" type="Area3D" parent="body_mesh"]
 
-[node name="Tank_mesh" type="MeshInstance3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 0.136389, 0, 0, 0, 0.862809, 0, -0.00119346, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body_mesh/body_hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000289917, 0, -0.000549316)
+shape = SubResource("BoxShape3D_mxk3p")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.649023, 0)
+
+[node name="head_mesh" type="MeshInstance3D" parent="head"]
 mesh = SubResource("CylinderMesh_a2myn")
+skeleton = NodePath("")
 
-[node name="Barrel_mesh" type="MeshInstance3D" parent="Head"]
-transform = Transform3D(0.182984, 0, 0, 0, 0.129271, 0, 0, 0, 1, 0, 0, -0.727102)
-mesh = SubResource("BoxMesh_ym7mu")
+[node name="barrel_pivot" type="Node3D" parent="head/head_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.491493)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 0.96625, 0.257605, 0, -0.257605, 0.96625, 0, 1.298, 2.32838)
+[node name="barrel_mesh" type="MeshInstance3D" parent="head/head_mesh/barrel_pivot"]
+transform = Transform3D(1, 0, -9.31322e-10, 0, 1, 0, 9.31322e-10, 0, 1, 0, 0.00875044, -0.351222)
+mesh = SubResource("BoxMesh_5hjg4")
+skeleton = NodePath("")
+
+[node name="head_hitbox" type="Area3D" parent="head/head_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2586e-10, 0, 2.98051e-08)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="head/head_mesh/head_hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000106812, 0)
+shape = SubResource("CylinderShape3D_a2myn")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mxk3p")
+
+[node name="camera_pivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="camera_pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.96625, 0.257605, 0, -0.257605, 0.96625, 0, 1.94165, 2.32838)
