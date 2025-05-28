@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwcj6tvnfkhin"]
+
+[ext_resource type="Script" uid="uid://cb50wd0o4yo1b" path="res://assets/tank_movement_controller.gd" id="1_mxk3p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vaebi"]
+size = Vector3(1, 1, 1.50195)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mxk3p"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5hjg4"]
+height = 0.276642
+radius = 0.434082
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a2myn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ym7mu"]
+
+[node name="player_tank_new" type="CharacterBody3D"]
+script = ExtResource("1_mxk3p")
+
+[node name="Body" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vaebi")
+
+[node name="Body_mesh" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_mxk3p")
+
+[node name="Head" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.643647, 0)
+shape = SubResource("CylinderShape3D_5hjg4")
+
+[node name="Tank_mesh" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 0.136389, 0, 0, 0, 0.862809, 0, -0.00119346, 0)
+mesh = SubResource("CylinderMesh_a2myn")
+
+[node name="Barrel_mesh" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(0.182984, 0, 0, 0, 0.129271, 0, 0, 0, 1, 0, 0, -0.727102)
+mesh = SubResource("BoxMesh_ym7mu")
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 0.96625, 0.257605, 0, -0.257605, 0.96625, 0, 1.298, 2.32838)

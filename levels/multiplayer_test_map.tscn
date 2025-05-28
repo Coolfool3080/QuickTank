@@ -36,5 +36,6 @@ metadata/_editor_floor_ = Vector3(0, -2, 0)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.608789, 0.793332, 0, -0.793332, 0.608789, 0, 0, 0)
 
+[connection signal="button_down" from="Host" to="." method="_on_host_button_down"]
 [connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_pressed"]

@@ -19,6 +19,8 @@ func _process(_delta):
 # clamp function limits up and down camera look angle,
 # 2nd argument = upper bounds, 3rd argumment = lower bounds
 func _input(event):
+	if not is_multiplayer_authority():
+		return
 	if event is InputEventMouseMotion:
 		var temp_rotation = rotation.z - event.relative.y / 1000 * sensitivity
 		temp_rotation = clamp(temp_rotation, -0.5, 0.5)
