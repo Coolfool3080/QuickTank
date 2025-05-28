@@ -13,7 +13,7 @@ func _on_host_pressed():
 	_add_player(multiplayer.get_unique_id())
 
 func _on_join_pressed():
-	peer.create_client("localhost", 135)
+	peer.create_client("47.155.52.142", 135)
 	multiplayer.multiplayer_peer = peer
 
 func _on_connected_to_server():
