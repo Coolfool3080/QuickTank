@@ -49,16 +49,19 @@ mesh = SubResource("BoxMesh_x57s6")
 skeleton = NodePath("../../..")
 
 [node name="tank_barrel_model" type="MeshInstance3D" parent="tank/tank_head_phys_box"]
-transform = Transform3D(0.883216, 0, 0, 0, 0.082872, 0, 0, 0, 0.0970361, 0.692755, 0, 0)
+transform = Transform3D(-3.86066e-08, 0, 0.0970361, 0, 0.082872, 0, -0.883216, 0, -4.24158e-09, -0.00724491, 0, -0.7)
 mesh = SubResource("BoxMesh_pdhg8")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="tank"]
 replication_config = SubResource("SceneReplicationConfig_pdhg8")
 
-[node name="camera_controller" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+[node name="camera_controller" type="Node3D" parent="tank"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("2_pdhg8")
 
-[node name="Camera3D" type="Camera3D" parent="camera_controller"]
+[node name="Camera3D" type="Camera3D" parent="tank/camera_controller"]
 transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.22219e-08, -4, 2, 0)
 current = true
+
+[node name="look_node" type="Node3D" parent="tank/camera_controller"]
+transform = Transform3D(1, 0, 1.42109e-14, 0, 1, -3.55271e-15, 0, 0, 1, 2.00936, 0.675055, 2.63496e-07)
