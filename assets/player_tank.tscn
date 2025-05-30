@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://di137jxkg0i6h"]
+[gd_scene load_steps=10 format=3 uid="uid://di137jxkg0i6h"]
 
 [ext_resource type="Script" uid="uid://caysg58cfc8q4" path="res://scripts/tank.gd" id="1_pdhg8"]
+[ext_resource type="PackedScene" uid="uid://cavkudnxtyvsx" path="res://assets/bullet.tscn" id="2_5mdrw"]
 [ext_resource type="Script" uid="uid://1syxfwp1riao" path="res://scripts/camera_controller.gd" id="2_pdhg8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ugdkx"]
@@ -26,9 +27,10 @@ properties/1/replication_mode = 1
 [node name="player_tank" type="Node3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="tank" type="CharacterBody3D" parent="." groups=["Player"]]
+[node name="tank" type="CharacterBody3D" parent="." groups=["Player", "hit_object"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_pdhg8")
+Bullet = ExtResource("2_5mdrw")
 
 [node name="tank_body_phys_box" type="CollisionShape3D" parent="tank"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -51,6 +53,9 @@ skeleton = NodePath("../../..")
 [node name="tank_barrel_model" type="MeshInstance3D" parent="tank/tank_head_phys_box"]
 transform = Transform3D(-3.86066e-08, 0, 0.0970361, 0, 0.082872, 0, -0.883216, 0, -4.24158e-09, -0.00724491, 0, -0.7)
 mesh = SubResource("BoxMesh_pdhg8")
+
+[node name="bullet_spawn_point" type="Marker3D" parent="tank/tank_head_phys_box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00993887, 0, -1.07967)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="tank"]
 replication_config = SubResource("SceneReplicationConfig_pdhg8")

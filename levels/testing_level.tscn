@@ -8,7 +8,7 @@ albedo_texture = ExtResource("1_omjae")
 
 [node name="testing_level" type="Node3D"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." groups=["hit_object"]]
 material_override = SubResource("StandardMaterial3D_omjae")
 use_collision = true
 size = Vector3(50, 1, 50)
@@ -18,3 +18,6 @@ transform = Transform3D(1, 0, 0, 0, 0.877874, 0.478891, 0, -0.478891, 0.877874, 
 
 [node name="player_tank" parent="." instance=ExtResource("1_m2onx")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+
+[node name="player_tank2" parent="." instance=ExtResource("1_m2onx")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.182369, 1, 7.91618)

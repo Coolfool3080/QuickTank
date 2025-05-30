@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwcj6tvnfkhin"]
+[gd_scene load_steps=9 format=3 uid="uid://bk44v6t36uppk"]
 
 [ext_resource type="Script" uid="uid://cb50wd0o4yo1b" path="res://assets/tank_movement_controller.gd" id="1_mxk3p"]
 
@@ -22,7 +22,7 @@ height = 0.28067
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mxk3p"]
 
-[node name="Tank" type="CharacterBody3D"]
+[node name="Tank" type="CharacterBody3D" groups=["hit_object"]]
 script = ExtResource("1_mxk3p")
 
 [node name="movement_collider" type="CollisionShape3D" parent="."]

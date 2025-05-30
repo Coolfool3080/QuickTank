@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ci0aiqasu178u"]
+[gd_scene load_steps=3 format=3 uid="uid://jscncr0nxbe"]
 
 [ext_resource type="MeshLibrary" uid="uid://uc0w8dauwqu0" path="res://assets/mesh/mesh_library_2.tres" id="1_kjyop"]
-[ext_resource type="PackedScene" uid="uid://cwcj6tvnfkhin" path="res://assets/player_tank_new.tscn" id="2_lqyau"]
+[ext_resource type="PackedScene" uid="uid://bk44v6t36uppk" path="res://assets/player_tank_new.tscn" id="2_lqyau"]
 
 [node name="level_11" type="Node3D"]
 
