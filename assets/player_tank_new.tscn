@@ -20,6 +20,7 @@ size = Vector3(0.15, 0.15, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a2myn"]
 height = 0.28067
+radius = 0.501465
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mxk3p"]
 
@@ -72,6 +73,10 @@ replication_config = SubResource("SceneReplicationConfig_mxk3p")
 
 [node name="Camera3D" type="Camera3D" parent="camera_pivot"]
 transform = Transform3D(1, 0, 0, 0, 0.96625, 0.257605, 0, -0.257605, 0.96625, 0, 1.94165, 2.32838)
+
+[node name="fire_cooldown_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="area_entered" from="body_mesh/body_hitbox" to="." method="_on_body_hitbox_area_entered"]
 [connection signal="area_entered" from="head/head_mesh/head_hitbox" to="." method="_on_head_hitbox_area_entered"]

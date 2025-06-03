@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@onready var fire_cooldown_timer = $fire_cooldown_timer
+
 const MOVE_SPEED = 5
 const ROTATION_SPEED = 1
 
@@ -39,10 +41,11 @@ func _physics_process(delta):
 
 # shoot 
 func _input(event):
-	if event.is_action_pressed("shoot"):
+	if event.is_action_pressed("shoot") and fire_cooldown_timer.is_stopped():
 		shoot()
 
 func shoot():
 	var bullet = Bullet.instantiate()
 	bullet.global_transform = $tank_head_phys_box/bullet_spawn_point.global_transform
 	get_tree().current_scene.add_child(bullet)
+	fire_cooldown_timer.start()

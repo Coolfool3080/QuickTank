@@ -23,7 +23,6 @@ offset_bottom = 86.0
 text = "Join"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://cwcj6tvnfkhin")
 spawn_path = NodePath("..")
 
 [node name="GridMap" type="GridMap" parent="."]

@@ -70,3 +70,7 @@ transform = Transform3D(1, 0, 1.42109e-14, 0, 1, -3.55271e-15, 0, 0, 1, 2.00936,
 
 [node name="player_tank" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="fire_cooldown_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

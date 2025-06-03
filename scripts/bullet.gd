@@ -11,3 +11,6 @@ func _process(delta):
 func _on_hit_box_body_entered(body):
 	if body.is_in_group("hit_object"):
 		queue_free()
+
+func _on_bullet_despawn_timer_timeout():
+	queue_free()
