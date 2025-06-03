@@ -75,6 +75,9 @@ func _physics_process(delta):
 
 	#shoot
 func _input(event):
+	if not is_multiplayer_authority():
+		return
+		
 	if event.is_action_pressed("shoot") and fire_cooldown_timer.is_stopped():
 		shoot()
 	
