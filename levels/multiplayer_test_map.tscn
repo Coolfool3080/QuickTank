@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://y2u0ohyf7vs"]
 
-[ext_resource type="Script" uid="uid://b3w2lfmef5cs1" path="res://scripts/multiplayer_test_map.gd" id="1_vk1xx"]
-[ext_resource type="PackedScene" uid="uid://di137jxkg0i6h" path="res://assets/player_tank.tscn" id="2_inuxk"]
+[ext_resource type="Script" uid="uid://b3w2lfmef5cs1" path="res://scripts/multiplayer_controller.gd" id="1_vk1xx"]
+[ext_resource type="PackedScene" uid="uid://cwcj6tvnfkhin" path="res://assets/player_tank_new.tscn" id="2_inuxk"]
 [ext_resource type="MeshLibrary" uid="uid://uc0w8dauwqu0" path="res://assets/mesh/mesh_library_2.tres" id="3_inuxk"]
 
 [node name="multiplayer_test_map" type="Node3D"]
@@ -23,7 +23,7 @@ offset_bottom = 86.0
 text = "Join"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://di137jxkg0i6h")
+_spawnable_scenes = PackedStringArray("uid://cwcj6tvnfkhin")
 spawn_path = NodePath("..")
 
 [node name="GridMap" type="GridMap" parent="."]

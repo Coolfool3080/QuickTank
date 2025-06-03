@@ -12,6 +12,7 @@ var camera_yaw = 0.0
 
 func _ready():
 	$camera_pivot/Camera3D.current = is_multiplayer_authority()
+	$MultiplayerSynchronizer.set_multiplayer_authority(multiplayer.get_unique_id())
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event):
@@ -45,8 +46,10 @@ func _physics_process(delta):
 
 	# Rotate head relative to tank's local space
 	var tank_basis = global_transform.basis
-	var camera_global_yaw = camera_pivot.global_transform.basis.get_euler().y
-	var tank_yaw = tank_basis.get_euler().y
-	var relative_yaw = camera_global_yaw - tank_yaw
+	
+	if is_multiplayer_authority():
+		var camera_global_yaw = camera_pivot.global_transform.basis.get_euler().y
+		var tank_yaw = global_transform.basis.get_euler().y
+		var relative_yaw = camera_global_yaw - tank_yaw
 
-	head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
+		head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
