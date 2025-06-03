@@ -3,6 +3,8 @@ extends CharacterBody3D
 const MOVE_SPEED = 5
 const ROTATION_SPEED = 1
 
+var TANK_HEALTH = 5
+
 @export var Bullet: PackedScene
 
 func _physics_process(delta):
@@ -14,8 +16,8 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta
 
 	# Tank head look angle
-	var tank_head = get_parent().get_node("tank/tank_head_phys_box")
-	var look_pos = get_parent().get_node("tank/camera_controller/look_node").global_position
+	var tank_head = get_node("tank_head_phys_box")
+	var look_pos = get_node("camera_controller/look_node").global_position
 	
 	tank_head.look_at(look_pos)
 

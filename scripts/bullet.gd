@@ -10,5 +10,4 @@ func _process(delta):
 
 func _on_hit_box_body_entered(body):
 	if body.is_in_group("hit_object"):
-		print("hit")
 		queue_free()
