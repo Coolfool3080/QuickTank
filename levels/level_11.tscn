@@ -12,8 +12,8 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="player_tank_new" parent="." instance=ExtResource("2_lqyau")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75999, 0)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.406163, 0.913801, 0, -0.913801, 0.406163, 0, 10.5836, 0)
+
+[node name="Tank" parent="." instance=ExtResource("2_lqyau")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.299197, 2.93965, -0.929623)
