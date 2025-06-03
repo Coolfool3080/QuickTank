@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cb50wd0o4yo1b" path="res://scripts/tank_movement_controller.gd" id="1_mxk3p"]
 [ext_resource type="PackedScene" uid="uid://cavkudnxtyvsx" path="res://assets/bullet.tscn" id="2_5hjg4"]
 [ext_resource type="PackedScene" uid="uid://dj3dvxmg8k1ar" path="res://assets/health_bar.tscn" id="3_a2myn"]
-[ext_resource type="Script" uid="uid://bxjjla217jcbb" path="res://scripts/health_script.gd" id="3_ym7mu"]
+[ext_resource type="Script" uid="uid://jbv1l2j2vf46" path="res://scripts/health_script.gd" id="3_ym7mu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vaebi"]
 size = Vector3(1, 1, 1.50195)

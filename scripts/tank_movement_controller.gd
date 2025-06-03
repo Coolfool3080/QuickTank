@@ -61,24 +61,16 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	# Rotate head relative to tank's local space
-	var tank_basis = global_transform.basis
 	var camera_global_yaw = camera_pivot.global_transform.basis.get_euler().y
 	var tank_yaw = global_transform.basis.get_euler().y
 	var relative_yaw = camera_global_yaw - tank_yaw
-	head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
 	
-	if is_multiplayer_authority():
-		var camera_global_yaw = camera_pivot.global_transform.basis.get_euler().y
-		var tank_yaw = global_transform.basis.get_euler().y
-		var relative_yaw = camera_global_yaw - tank_yaw
-		
-		var camera_global_pitch = camera_pivot.global_transform.basis.get_euler().x
-		var tank_pitch = global_transform.basis.get_euler().x
-		var relative_pitch = camera_global_pitch - tank_pitch
-		
-		head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
-		head_barrel.rotation.x = lerp_angle(head_barrel.rotation.x, relative_pitch, delta * HEAD_ROTATE_SPEED)
+	var camera_global_pitch = camera_pivot.global_transform.basis.get_euler().x
+	var tank_pitch = global_transform.basis.get_euler().x
+	var relative_pitch = camera_global_pitch - tank_pitch
+	
+	head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
+	head_barrel.rotation.x = lerp_angle(head_barrel.rotation.x, relative_pitch, delta * HEAD_ROTATE_SPEED)
 
 	#shoot
 func _input(event):

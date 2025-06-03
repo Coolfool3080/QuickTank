@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcq1w4l1qow6p"]
+[gd_scene load_steps=3 format=3 uid="uid://bcq1w4l1qow6p"]
 
+[ext_resource type="Script" uid="uid://b3w2lfmef5cs1" path="res://scripts/multiplayer_controller.gd" id="1_vk1xx"]
 [ext_resource type="MeshLibrary" uid="uid://uc0w8dauwqu0" path="res://assets/mesh/mesh_library_2.tres" id="3_inuxk"]
 
 [node name="multiplayer_test_map" type="Node3D"]
+script = ExtResource("1_vk1xx")
 
 [node name="Host" type="Button" parent="."]
 offset_left = 12.0
