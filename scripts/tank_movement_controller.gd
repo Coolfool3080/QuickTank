@@ -57,8 +57,8 @@ func _physics_process(delta):
 		velocity.x = forward.x * MOVE_SPEED * move_input
 		velocity.z = forward.z * MOVE_SPEED * move_input
 	else:
-		velocity.x = move_toward(velocity.x, 0, MOVE_SPEED/2 * delta)
-		velocity.z = move_toward(velocity.z, 0, MOVE_SPEED/2 * delta)
+		velocity.x = move_toward(velocity.x, 0, MOVE_SPEED * 4 * delta)
+		velocity.z = move_toward(velocity.z, 0, MOVE_SPEED * 4 * delta)
 	
 	move_and_slide()
 	
@@ -79,8 +79,9 @@ func _input(event):
 		return
 		
 	if event.is_action_pressed("shoot") and fire_cooldown_timer.is_stopped():
-		shoot()
-	
+		shoot.rpc()
+
+@rpc("call_local")
 func shoot():
 	var bullet = Bullet.instantiate()
 	bullet.global_transform = $head/head_mesh/barrel_pivot/barrel_mesh/bullet_spawn_point.global_transform

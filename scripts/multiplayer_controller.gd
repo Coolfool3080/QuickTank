@@ -22,4 +22,4 @@ func _on_join_pressed():
 func add_player(pid):
 	var player = PLAYER.instantiate()
 	player.name = str(pid)
-	add_child(player,true)
+	add_child(player)
