@@ -83,9 +83,9 @@ func shoot():
 func _on_body_hitbox_area_entered(area):
 	if area.is_in_group("bullet"):
 		print("bullet hit body")
-		$Sprite3D.take_damage(1)
+		$health_sprite.take_damage(1)
 
 func _on_head_hitbox_area_entered(area):
 	if area.is_in_group("bullet"):
 		print("Bullet hit head!")
-		$Sprite3D.take_damage(1)
+		$health_sprite.take_damage(1)

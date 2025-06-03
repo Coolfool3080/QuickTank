@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bk44v6t36uppk"]
+[gd_scene load_steps=13 format=3 uid="uid://bk44v6t36uppk"]
 
 [ext_resource type="Script" uid="uid://cb50wd0o4yo1b" path="res://scripts/tank_movement_controller.gd" id="1_mxk3p"]
 [ext_resource type="PackedScene" uid="uid://cavkudnxtyvsx" path="res://assets/bullet.tscn" id="2_5hjg4"]
+[ext_resource type="PackedScene" uid="uid://dj3dvxmg8k1ar" path="res://assets/health_bar.tscn" id="3_a2myn"]
+[ext_resource type="Script" uid="uid://bxjjla217jcbb" path="res://scripts/health_script.gd" id="3_ym7mu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vaebi"]
 size = Vector3(1, 1, 1.50195)
@@ -23,6 +25,9 @@ height = 0.28067
 radius = 0.501465
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mxk3p"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ym7mu"]
+viewport_path = NodePath("health_sprite/SubViewport")
 
 [node name="Tank" type="CharacterBody3D" groups=["hit_object"]]
 script = ExtResource("1_mxk3p")
@@ -77,6 +82,17 @@ transform = Transform3D(1, 0, 0, 0, 0.96625, 0.257605, 0, -0.257605, 0.96625, 0,
 [node name="fire_cooldown_timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="health_sprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25231, -0.00474453)
+texture = SubResource("ViewportTexture_ym7mu")
+script = ExtResource("3_ym7mu")
+
+[node name="SubViewport" type="SubViewport" parent="health_sprite"]
+disable_3d = true
+transparent_bg = true
+
+[node name="health_bar" parent="health_sprite/SubViewport" instance=ExtResource("3_a2myn")]
 
 [connection signal="area_entered" from="body_mesh/body_hitbox" to="." method="_on_body_hitbox_area_entered"]
 [connection signal="area_entered" from="head/head_mesh/head_hitbox" to="." method="_on_head_hitbox_area_entered"]

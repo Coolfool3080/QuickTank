@@ -1,12 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcq1w4l1qow6p"]
+[gd_scene load_steps=2 format=3 uid="uid://bcq1w4l1qow6p"]
 
-[ext_resource type="Script" path="res://scripts/multiplayer_test_map.gd" id="1_vk1xx"]
-[ext_resource type="PackedScene" uid="uid://di137jxkg0i6h" path="res://assets/player_tank.tscn" id="2_inuxk"]
 [ext_resource type="MeshLibrary" uid="uid://uc0w8dauwqu0" path="res://assets/mesh/mesh_library_2.tres" id="3_inuxk"]
 
 [node name="multiplayer_test_map" type="Node3D"]
-script = ExtResource("1_vk1xx")
-player_tank = ExtResource("2_inuxk")
 
 [node name="Host" type="Button" parent="."]
 offset_left = 12.0
