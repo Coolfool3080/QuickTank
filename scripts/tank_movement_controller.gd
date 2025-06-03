@@ -22,6 +22,7 @@ func _enter_tree() -> void:
 func _ready():
 	if is_multiplayer_authority():
 		$camera_pivot/Camera3D.current = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		#print("Tank spawned. My ID:", multiplayer.get_unique_id())
 		#print("Has authority:", is_multiplayer_authority())
 	
