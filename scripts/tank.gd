@@ -3,6 +3,10 @@ extends CharacterBody3D
 const MOVE_SPEED = 5
 const ROTATION_SPEED = 1
 
+var TANK_HEALTH = 5
+
+@export var Bullet: PackedScene
+
 func _physics_process(delta):
 	if not is_multiplayer_authority():
 		return
@@ -10,9 +14,10 @@ func _physics_process(delta):
 	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		
-	var tank_head = get_parent().get_node("tank/tank_head_phys_box")
-	var look_pos = get_parent().get_node("tank/camera_controller/look_node").global_position
+
+	# Tank head look angle
+	var tank_head = get_node("tank_head_phys_box")
+	var look_pos = get_node("camera_controller/look_node").global_position
 	
 	tank_head.look_at(look_pos)
 
@@ -31,3 +36,13 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, MOVE_SPEED)
 
 	move_and_slide()
+
+# shoot 
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		shoot()
+
+func shoot():
+	var bullet = Bullet.instantiate()
+	bullet.global_transform = $tank_head_phys_box/bullet_spawn_point.global_transform
+	get_tree().current_scene.add_child(bullet)

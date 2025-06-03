@@ -5,13 +5,12 @@ var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_tree().get_nodes_in_group("Player")[0]
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	global_position = player.global_position
 	pass
 
 # handles camera look angle relative to mouse movement

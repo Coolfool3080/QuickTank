@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://di137jxkg0i6h"]
+[gd_scene load_steps=10 format=3 uid="uid://di137jxkg0i6h"]
 
 [ext_resource type="Script" uid="uid://caysg58cfc8q4" path="res://scripts/tank.gd" id="1_pdhg8"]
+[ext_resource type="PackedScene" uid="uid://cavkudnxtyvsx" path="res://assets/bullet.tscn" id="2_5mdrw"]
 [ext_resource type="Script" uid="uid://1syxfwp1riao" path="res://scripts/camera_controller.gd" id="2_pdhg8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ugdkx"]
@@ -23,45 +24,49 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="player_tank" type="Node3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="tank" type="CharacterBody3D" parent="." groups=["Player"]]
+[node name="tank" type="CharacterBody3D" groups=["Player", "hit_object"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_pdhg8")
+Bullet = ExtResource("2_5mdrw")
 
-[node name="tank_body_phys_box" type="CollisionShape3D" parent="tank"]
+[node name="tank_body_phys_box" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_ugdkx")
 
-[node name="tank_body_model" type="MeshInstance3D" parent="tank/tank_body_phys_box"]
+[node name="tank_body_model" type="MeshInstance3D" parent="tank_body_phys_box"]
 transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_ugdkx")
 skeleton = NodePath("../../..")
 
-[node name="tank_head_phys_box" type="CollisionShape3D" parent="tank"]
+[node name="tank_head_phys_box" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.74228e-08, 0.674, -0.334)
 shape = SubResource("BoxShape3D_x57s6")
 
-[node name="tank_head_model" type="MeshInstance3D" parent="tank/tank_head_phys_box"]
+[node name="tank_head_model" type="MeshInstance3D" parent="tank_head_phys_box"]
 transform = Transform3D(0.504323, 0, 0, 0, 0.343149, 0, 0, 0, 0.5417, 0, 0, 0)
 mesh = SubResource("BoxMesh_x57s6")
 skeleton = NodePath("../../..")
 
-[node name="tank_barrel_model" type="MeshInstance3D" parent="tank/tank_head_phys_box"]
+[node name="tank_barrel_model" type="MeshInstance3D" parent="tank_head_phys_box"]
 transform = Transform3D(-3.86066e-08, 0, 0.0970361, 0, 0.082872, 0, -0.883216, 0, -4.24158e-09, -0.00724491, 0, -0.7)
 mesh = SubResource("BoxMesh_pdhg8")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="tank"]
+[node name="bullet_spawn_point" type="Marker3D" parent="tank_head_phys_box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00993887, 0, -1.07967)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_pdhg8")
 
-[node name="camera_controller" type="Node3D" parent="tank"]
+[node name="camera_controller" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("2_pdhg8")
 
-[node name="Camera3D" type="Camera3D" parent="tank/camera_controller"]
+[node name="Camera3D" type="Camera3D" parent="camera_controller"]
 transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.22219e-08, -4, 2, 0)
 current = true
 
-[node name="look_node" type="Node3D" parent="tank/camera_controller"]
+[node name="look_node" type="Node3D" parent="camera_controller"]
 transform = Transform3D(1, 0, 1.42109e-14, 0, 1, -3.55271e-15, 0, 0, 1, 2.00936, 0.675055, 2.63496e-07)
+
+[node name="player_tank" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

@@ -3,10 +3,14 @@ extends CharacterBody3D
 @onready var camera_pivot = $camera_pivot
 @onready var head_node = $head
 
+@export var Bullet: PackedScene
+
 const MOVE_SPEED = 5.0
 const ROTATION_SPEED = 1.5
 const CAMERA_SENSITIVITY = 0.001
 const HEAD_ROTATE_SPEED = 1.0
+
+var TANK_HEALTH = 5
 
 var camera_yaw = 0.0
 
@@ -52,4 +56,22 @@ func _physics_process(delta):
 		var tank_yaw = global_transform.basis.get_euler().y
 		var relative_yaw = camera_global_yaw - tank_yaw
 
-		head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
+	head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
+
+	#shoot
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		shoot()
+
+func shoot():
+	var bullet = Bullet.instantiate()
+	bullet.global_transform = $head/head_mesh/barrel_pivot/barrel_mesh/bullet_spawn_point.global_transform
+	get_tree().current_scene.add_child(bullet)
+
+func _on_body_hitbox_area_entered(area):
+	if area is Area3D:
+		$Sprite3D.take_damage(1)
+
+func _on_head_hitbox_area_entered(area):
+	if area is Area3D:
+		$Sprite3D.take_damage(1)
