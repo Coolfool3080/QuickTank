@@ -55,8 +55,7 @@ func _physics_process(delta):
 		var camera_global_yaw = camera_pivot.global_transform.basis.get_euler().y
 		var tank_yaw = global_transform.basis.get_euler().y
 		var relative_yaw = camera_global_yaw - tank_yaw
-
-	head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
+		head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
 
 	#shoot
 func _input(event):
@@ -69,9 +68,11 @@ func shoot():
 	get_tree().current_scene.add_child(bullet)
 
 func _on_body_hitbox_area_entered(area):
-	if area is Area3D:
+	if area.is_in_group("bullet"):
+		print("bullet hit body")
 		$Sprite3D.take_damage(1)
 
 func _on_head_hitbox_area_entered(area):
-	if area is Area3D:
+	if area.is_in_group("bullet"):
+		print("Bullet hit head!")
 		$Sprite3D.take_damage(1)

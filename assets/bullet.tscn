@@ -26,7 +26,7 @@ skeleton = NodePath("../CollisionShape3D")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 shape = SubResource("SphereShape3D_hpu58")
 
-[node name="hit_box" type="Area3D" parent="." groups=["hit_object"]]
+[node name="hit_box" type="Area3D" parent="." groups=["bullet", "hit_object"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hit_box"]
 transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 0, 0)
