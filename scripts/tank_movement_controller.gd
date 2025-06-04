@@ -73,6 +73,33 @@ func _physics_process(delta):
 	head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
 	head_barrel.rotation.x = lerp_angle(head_barrel.rotation.x, relative_pitch, delta * HEAD_ROTATE_SPEED)
 
+	var barrel = $head/head_mesh/barrel_pivot
+	var camera = get_viewport().get_camera_3d()
+	var aim_origin = barrel.global_transform.origin
+	var aim_direction = -barrel.global_transform.basis.z
+	var target_point = aim_origin + aim_direction * 1000
+
+	var query = PhysicsRayQueryParameters3D.new()
+	query.from = aim_origin
+	query.to = target_point
+	query.collision_mask = 1
+
+	var space_state = get_world_3d().direct_space_state
+	var result = space_state.intersect_ray(query)
+
+	var crosshair_pos = Vector2.ZERO
+
+	if result:
+		crosshair_pos = camera.unproject_position(result.position)
+	else:
+		crosshair_pos = camera.unproject_position(target_point)
+
+	if camera.is_position_behind(target_point):
+		$hud/Line2D.visible = false
+	else:
+		$hud/Line2D.visible = true
+		$hud/Line2D.position = crosshair_pos
+	
 	#shoot
 func _input(event):
 	if not is_multiplayer_authority():
