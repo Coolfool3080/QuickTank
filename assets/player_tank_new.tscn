@@ -38,6 +38,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("head/head_mesh/barrel_pivot:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("health_sprite/SubViewport/health_bar:value")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ym7mu"]
 viewport_path = NodePath("health_sprite/SubViewport")
@@ -100,6 +103,7 @@ one_shot = true
 
 [node name="health_sprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25231, -0.00474453)
+billboard = 1
 texture = SubResource("ViewportTexture_ym7mu")
 script = ExtResource("3_ym7mu")
 

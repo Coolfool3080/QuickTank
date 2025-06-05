@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 @export var SPEED = 5
+var damage = 1
 
 func _ready():
 	pass
