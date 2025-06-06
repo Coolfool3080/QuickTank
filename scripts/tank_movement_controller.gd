@@ -43,7 +43,6 @@ func _unhandled_input(event):
 		
 		camera_pitch -= event.relative.y * CAMERA_SENSITIVITY
 		camera_pivot.rotation.x = clamp(camera_pitch, -0.5, 0.5)
-
 	
 func _physics_process(delta):
 	if not is_multiplayer_authority():
@@ -80,7 +79,6 @@ func _physics_process(delta):
 	head_node.rotation.y = lerp_angle(head_node.rotation.y, relative_yaw, delta * HEAD_ROTATE_SPEED)
 	head_barrel.rotation.x = lerp_angle(head_barrel.rotation.x, relative_pitch, delta * HEAD_ROTATE_SPEED)
 	
-	
 	fast_head.rotation.y = relative_yaw
 	fast_barrel.rotation.x = relative_pitch
 
@@ -93,7 +91,7 @@ func _physics_process(delta):
 	var query = PhysicsRayQueryParameters3D.new()
 	query.from = aim_origin
 	query.to = target_point
-	query.collision_mask = 1
+	query.collision_mask = 2
 
 	var space_state = get_world_3d().direct_space_state
 	var result = space_state.intersect_ray(query)
@@ -123,7 +121,7 @@ func _physics_process(delta):
 	var query2 = PhysicsRayQueryParameters3D.new()
 	query2.from = aim_origin2
 	query2.to = target_point2
-	query2.collision_mask = 1
+	query2.collision_mask = 2
 	
 	var space_state2 = get_world_3d().direct_space_state
 	var result2 = space_state2.intersect_ray(query2)

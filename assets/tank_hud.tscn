@@ -33,3 +33,33 @@ points = PackedVector2Array(580, 324, 602, 324)
 position = Vector2(-578, -187)
 scale = Vector2(1.00942, 0.574634)
 points = PackedVector2Array(580, 324, 602, 324)
+
+[node name="health_number" type="Label" parent="."]
+offset_left = 425.0
+offset_top = 550.0
+offset_right = 551.0
+offset_bottom = 619.0
+theme_override_font_sizes/font_size = 50
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="armor_number" type="Label" parent="."]
+offset_left = 604.0
+offset_top = 550.0
+offset_right = 730.0
+offset_bottom = 619.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ammo_number" type="Label" parent="."]
+offset_left = 28.0
+offset_top = 550.0
+offset_right = 154.0
+offset_bottom = 619.0
+theme_override_font_sizes/font_size = 50
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
