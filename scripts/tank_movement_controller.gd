@@ -14,10 +14,11 @@ const ROTATION_SPEED = 1.5
 const CAMERA_SENSITIVITY = 0.001
 const HEAD_ROTATE_SPEED = 2.0
 
-var TANK_HEALTH = 5
+var tank_health = 5
 var kill_count = 0
 var camera_yaw = 0.0
 var camera_pitch = 0.0
+var hud
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(name))
@@ -26,6 +27,9 @@ func _ready():
 	if is_multiplayer_authority():
 		$camera_pivot/Camera3D.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
+		hud = preload("res://assets/tank_hud.tscn").instantiate()
+		get_tree().get_root().add_child(hud)
 		#print("Tank spawned. My ID:", multiplayer.get_unique_id())
 		#print("Has authority:", is_multiplayer_authority())
 	
@@ -95,6 +99,9 @@ func _physics_process(delta):
 	var result = space_state.intersect_ray(query)
 
 	var crosshair_pos = Vector2.ZERO
+	
+	var hud_center = hud.get_node("Line2D")
+	var hud_crosshair = hud.get_node("crosshair")
 
 	if result:
 		crosshair_pos = camera.unproject_position(result.position)
@@ -102,10 +109,10 @@ func _physics_process(delta):
 		crosshair_pos = camera.unproject_position(target_point)
 
 	if camera.is_position_behind(target_point):
-		$hud/Line2D.visible = false
+		hud_center.visible = false
 	else:
-		$hud/Line2D.visible = true
-		$hud/Line2D.position = crosshair_pos
+		hud_center.visible = true
+		hud_center.position = crosshair_pos
 	
 	var barrel2 = $head2/barrel_pivot2
 	var camera2 = get_viewport().get_camera_3d()
@@ -121,16 +128,17 @@ func _physics_process(delta):
 	var space_state2 = get_world_3d().direct_space_state
 	var result2 = space_state2.intersect_ray(query2)
 	var crosshair_pos2 = Vector2.ZERO
+	
 	if result2:
 		crosshair_pos2 = camera2.unproject_position(result2.position)
 	else:
 		crosshair_pos2 = camera2.unproject_position(target_point2)
 
 	if camera2.is_position_behind(target_point2):
-		$hud/crosshair.visible = false
+		hud_crosshair.visible = false
 	else:
-		$hud/crosshair.visible = true
-		$hud/crosshair.position = crosshair_pos2
+		hud_crosshair.visible = true
+		hud_crosshair.position = crosshair_pos2
 	
 	#shoot
 func _input(event):
@@ -153,7 +161,7 @@ func _on_body_hitbox_area_entered(area):
 	if area.is_in_group("bullet"):
 		print("bullet hit body")
 		$health_sprite.take_damage(1)
-		TANK_HEALTH -= 1
+		tank_health -= 1
 
 func _on_head_hitbox_area_entered(area):
 	if not is_multiplayer_authority():
@@ -161,7 +169,7 @@ func _on_head_hitbox_area_entered(area):
 	if area.is_in_group("bullet"):
 		print("Bullet hit head!")
 		$health_sprite.take_damage(1)
-		TANK_HEALTH -= 1
+		tank_health -= 1
 
 func is_dead():
-	return TANK_HEALTH < 1
+	return tank_health < 1
