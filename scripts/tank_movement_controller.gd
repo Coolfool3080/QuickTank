@@ -7,12 +7,14 @@ extends CharacterBody3D
 @onready var head_barrel = $head/head_mesh/barrel_pivot
 @onready var fast_barrel = $head2/barrel_pivot2
 @onready var fire_cooldown_timer = $fire_cooldown_timer
+@onready var player_camera_scene = preload("res://assets/player_camera.tscn")
 
 const MOVE_SPEED = 5.0
 const ROTATION_SPEED = 1.5
 const HEAD_ROTATE_SPEED = 2.0
 
 var camera_rotation: Vector2 = Vector2.ZERO
+var camera: Node3D
 var tank_health = 100
 var tank_armor = 100
 var kill_count = 0
@@ -24,9 +26,12 @@ func _enter_tree() -> void:
 func _ready():
 	if is_multiplayer_authority():
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		var camera_pivot = get_tree().get_root().get_node("multiplayer_test_map/camera_yaw")
-		camera_pivot.target = self
-		camera_pivot.get_node("camera_pitch/Camera3D").current = true
+		
+		camera = player_camera_scene.instantiate()
+		get_tree().get_root().add_child(camera)
+		
+		camera.target = self
+		camera.get_node("camera_yaw/camera_pitch/Camera3D").current = true
 		
 		hud = preload("res://assets/tank_hud.tscn").instantiate()
 		get_tree().get_root().add_child(hud)
@@ -41,9 +46,9 @@ func _physics_process(delta):
 		velocity.y += get_gravity().y * delta
 	else:
 		velocity.y = 0
-	
-	var camera_yaw = get_tree().get_root().get_node("multiplayer_test_map/camera_yaw")
-	var camera_pitch = get_tree().get_root().get_node("multiplayer_test_map/camera_yaw/camera_pitch")
+
+	var camera_yaw = camera.get_node("camera_yaw")
+	var camera_pitch = camera.get_node("camera_yaw/camera_pitch")
 	
 	head_node.global_rotation.y = camera_yaw.global_rotation.y
 	head_barrel.global_rotation.x = camera_pitch.global_rotation.x

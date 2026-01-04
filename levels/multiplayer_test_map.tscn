@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcq1w4l1qow6p"]
+[gd_scene load_steps=3 format=3 uid="uid://bcq1w4l1qow6p"]
 
 [ext_resource type="Script" uid="uid://b3w2lfmef5cs1" path="res://scripts/multiplayer_controller.gd" id="1_vk1xx"]
-[ext_resource type="Script" uid="uid://1syxfwp1riao" path="res://scripts/camera_controller.gd" id="3_axrgn"]
 [ext_resource type="MeshLibrary" uid="uid://uc0w8dauwqu0" path="res://assets/mesh/mesh_library_2.tres" id="3_inuxk"]
 
 [node name="multiplayer_test_map" type="Node3D"]
@@ -36,14 +35,6 @@ metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.608789, 0.793332, 0, -0.793332, 0.608789, 0, 0, 0)
-
-[node name="camera_yaw" type="Node3D" parent="."]
-script = ExtResource("3_axrgn")
-
-[node name="camera_pitch" type="Node3D" parent="camera_yaw"]
-
-[node name="Camera3D" type="Camera3D" parent="camera_yaw/camera_pitch"]
-transform = Transform3D(1, 0, 0, 0, 0.9662503, 0.25760508, 0, -0.25760508, 0.9662503, 0, 1.94165, 2.32838)
 
 [connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
