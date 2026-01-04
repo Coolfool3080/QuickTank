@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://di137jxkg0i6h"]
+[gd_scene load_steps=9 format=3 uid="uid://di137jxkg0i6h"]
 
 [ext_resource type="Script" uid="uid://caysg58cfc8q4" path="res://scripts/tank.gd" id="1_pdhg8"]
 [ext_resource type="PackedScene" uid="uid://cavkudnxtyvsx" path="res://assets/bullet.tscn" id="2_5mdrw"]
-[ext_resource type="Script" uid="uid://1syxfwp1riao" path="res://scripts/camera_controller.gd" id="2_pdhg8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ugdkx"]
 size = Vector3(1.50146, 1, 1)
@@ -59,7 +58,6 @@ replication_config = SubResource("SceneReplicationConfig_pdhg8")
 
 [node name="camera_controller" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-script = ExtResource("2_pdhg8")
 
 [node name="Camera3D" type="Camera3D" parent="camera_controller"]
 transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.22219e-08, -4, 2, 0)

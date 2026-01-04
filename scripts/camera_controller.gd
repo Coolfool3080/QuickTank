@@ -1,28 +1,35 @@
 extends Node3D
 
-var player
-@export var sensitivity := 5
+@export var target: Node3D
+@export var max_pitch := 0.6
+
+@onready var pitch_node = $camera_pitch
+
+const MAX_Y_ROTATION = 0.6
+const CAMERA_SENSITIVITY = 0.001
+
+var yaw = 0.0
+var pitch = 0.0
+var camera_rotation: Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	if not target:
+		return
+	
+	global_position = target.global_position
+	global_rotation.y = yaw
+	pitch_node.rotation.x = pitch
 
-# handles camera look angle relative to mouse movement
-# mouse input x and y values are divided by 1000 to create 1:1 translation from 2D to 3D
-# clamp function limits up and down camera look angle,
-# 2nd argument = upper bounds, 3rd argumment = lower bounds
 func _input(event):
 	if not is_multiplayer_authority():
 		return
-	if event is InputEventMouseMotion:
-		var temp_rotation = rotation.z - event.relative.y / 1000 * sensitivity
-		temp_rotation = clamp(temp_rotation, -0.5, 0.5)
 		
-		rotation.z = temp_rotation
-		rotation.y -= event.relative.x / 1000 * sensitivity
+	if event is InputEventMouseMotion:
+		yaw -= event.relative.x * CAMERA_SENSITIVITY
+		pitch -= event.relative.y * CAMERA_SENSITIVITY
+		pitch = clamp(pitch, -max_pitch, max_pitch)

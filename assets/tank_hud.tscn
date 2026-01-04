@@ -13,26 +13,30 @@ end_cap_mode = 2
 position = Vector2(576, 324)
 
 [node name="Line2D6" type="Line2D" parent="crosshair"]
-position = Vector2(186, -615)
+position = Vector2(162, -255)
 rotation = 1.5708
-scale = Vector2(1.00942, 0.574634)
+scale = Vector2(0.415, 0.5)
 points = PackedVector2Array(580, 324, 602, 324)
+width = 5.0
 
 [node name="Line2D5" type="Line2D" parent="crosshair"]
-position = Vector2(-614, -187)
-scale = Vector2(1.00942, 0.574634)
+position = Vector2(-263.00003, -162.00002)
+scale = Vector2(0.427, 0.5)
 points = PackedVector2Array(580, 324, 602, 324)
+width = 5.0
 
 [node name="Line2D4" type="Line2D" parent="crosshair"]
-position = Vector2(186, -578)
+position = Vector2(162, -237)
 rotation = 1.5708
-scale = Vector2(1.00942, 0.574634)
+scale = Vector2(0.419, 0.5)
 points = PackedVector2Array(580, 324, 602, 324)
+width = 5.0
 
 [node name="Line2D3" type="Line2D" parent="crosshair"]
-position = Vector2(-578, -187)
-scale = Vector2(1.00942, 0.574634)
+position = Vector2(-271, -162)
+scale = Vector2(0.477, 0.5)
 points = PackedVector2Array(580, 324, 602, 324)
+width = 5.0
 
 [node name="health_number" type="Label" parent="."]
 offset_left = 425.0
@@ -40,7 +44,7 @@ offset_top = 550.0
 offset_right = 551.0
 offset_bottom = 619.0
 theme_override_font_sizes/font_size = 50
-text = "5"
+text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -50,16 +54,16 @@ offset_top = 550.0
 offset_right = 730.0
 offset_bottom = 619.0
 theme_override_font_sizes/font_size = 50
-text = "0"
+text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ammo_number" type="Label" parent="."]
-offset_left = 28.0
+offset_left = 1000.0
 offset_top = 550.0
-offset_right = 154.0
+offset_right = 1126.0
 offset_bottom = 619.0
 theme_override_font_sizes/font_size = 50
-text = "10"
+text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1

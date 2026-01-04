@@ -89,11 +89,6 @@ shape = SubResource("CylinderShape3D_a2myn")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_mxk3p")
 
-[node name="camera_pivot" type="Node3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="camera_pivot"]
-transform = Transform3D(1, 0, 0, 0, 0.96625, 0.257605, 0, -0.257605, 0.96625, 0, 1.94165, 2.32838)
-
 [node name="fire_cooldown_timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
