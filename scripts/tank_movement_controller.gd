@@ -25,13 +25,13 @@ func _enter_tree() -> void:
 	
 func _ready():
 	if is_multiplayer_authority():
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
 		camera = player_camera_scene.instantiate()
 		get_tree().get_root().add_child(camera)
 		
 		camera.target = self
-		camera.get_node("camera_yaw/camera_pitch/Camera3D").current = true
+		camera.get_node("camera_yaw/camera_pitch/spring/Camera3D").current = true
 		
 		hud = preload("res://assets/tank_hud.tscn").instantiate()
 		get_tree().get_root().add_child(hud)

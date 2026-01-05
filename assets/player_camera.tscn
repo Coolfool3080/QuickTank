@@ -9,5 +9,9 @@ script = ExtResource("1_0b4cm")
 
 [node name="camera_pitch" type="Node3D" parent="camera_yaw"]
 
-[node name="Camera3D" type="Camera3D" parent="camera_yaw/camera_pitch"]
-transform = Transform3D(1, 0, 0, 0, 0.9662503, 0.25760508, 0, -0.25760508, 0.9662503, 0, 1.94165, 2.32838)
+[node name="spring" type="SpringArm3D" parent="camera_yaw/camera_pitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.942, 0)
+spring_length = 2.334
+
+[node name="Camera3D" type="Camera3D" parent="camera_yaw/camera_pitch/spring"]
+transform = Transform3D(1, 0, 0, 0, 0.9662503, 0.25760508, 0, -0.25760508, 0.9662503, 0, -0.00034999847, 2.32838)
