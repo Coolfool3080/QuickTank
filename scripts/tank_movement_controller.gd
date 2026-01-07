@@ -1,13 +1,15 @@
 extends CharacterBody3D
 
 @export var Bullet: PackedScene
+@export var health_value: float = 100.0
+@export var armor_value: float = 100.0
 
 @onready var head_node = $head
 @onready var fast_head = $head2
 @onready var head_barrel = $head/head_mesh/barrel_pivot
 @onready var fast_barrel = $head2/barrel_pivot2
 @onready var fire_cooldown_timer = $fire_cooldown_timer
-@onready var player_camera_scene = preload("res://assets/player_camera.tscn")
+@onready var player_camera_scene
 
 const MOVE_SPEED = 5.0
 const ROTATION_SPEED = 1.5
@@ -15,9 +17,6 @@ const HEAD_ROTATE_SPEED = 2.0
 
 var camera_rotation: Vector2 = Vector2.ZERO
 var camera: Node3D
-var tank_health = 100
-var tank_armor = 100
-var kill_count = 0
 var hud
 
 func _enter_tree() -> void:
@@ -27,6 +26,7 @@ func _ready():
 	if is_multiplayer_authority():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
+		player_camera_scene = preload("res://assets/player_camera.tscn")
 		camera = player_camera_scene.instantiate()
 		get_tree().get_root().add_child(camera)
 		
@@ -137,14 +137,19 @@ func _physics_process(delta):
 	#else:
 		#hud_crosshair.visible = true
 		#hud_crosshair.position = crosshair_pos2
-	
+
 	#shoot
 func _input(event):
 	if not is_multiplayer_authority():
 		return
+	
+	var ammo_count: int = int(hud.get_node("ammo_number").text)
 		
-	if event.is_action_pressed("shoot") and fire_cooldown_timer.is_stopped():
+	if event.is_action_pressed("shoot") and fire_cooldown_timer.is_stopped() and ammo_count > 0:
 		shoot.rpc()
+		hud.decrease_hud_ammo()
+
+var bullet_damage: int = 10
 
 @rpc("call_local")
 func shoot():
@@ -158,16 +163,16 @@ func _on_body_hitbox_area_entered(area):
 		return
 	if area.is_in_group("bullet"):
 		print("bullet hit body")
-		$health_sprite.take_damage(1)
-		tank_health -= 1
+		$health_sprite.take_damage(bullet_damage)
+		hud.decrease_hud_health(bullet_damage)
 
 func _on_head_hitbox_area_entered(area):
 	if not is_multiplayer_authority():
 		return
 	if area.is_in_group("bullet"):
 		print("Bullet hit head!")
-		$health_sprite.take_damage(1)
-		tank_health -= 1
+		$health_sprite.take_damage(bullet_damage)
+		hud.decrease_hud_health(bullet_damage)
 
 func is_dead():
-	return tank_health < 1
+	return hud.get_node("health_number").text == "0"

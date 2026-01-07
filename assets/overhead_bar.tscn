@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj3dvxmg8k1ar"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_omfuv"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fy516"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arehm"]
+bg_color = Color(0.33933225, 0.33933225, 0.33933225, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0076186024, 0.0076186024, 0.0076186024, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nh6w"]
+bg_color = Color(1.1801987, 0.7715649, 0, 1)
+
+[node name="overhead_bar" type="CanvasLayer"]
+
+[node name="health_bar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -9.5
+offset_right = 96.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_omfuv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fy516")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="armor_bar" type="ProgressBar" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 3.0
+offset_right = 97.0
+offset_bottom = 10.0
+theme_override_styles/background = SubResource("StyleBoxFlat_arehm")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7nh6w")
+step = 1.0
+value = 100.0
+show_percentage = false

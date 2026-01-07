@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://dta57xjx65jx4"]
+[gd_scene load_steps=2 format=3 uid="uid://dta57xjx65jx4"]
+
+[ext_resource type="Script" uid="uid://c01pipxco743i" path="res://scripts/hud_updater.gd" id="1_6pbv1"]
 
 [node name="hud" type="CanvasLayer"]
+script = ExtResource("1_6pbv1")
 
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2(576, 324)
@@ -45,8 +48,6 @@ offset_right = 551.0
 offset_bottom = 619.0
 theme_override_font_sizes/font_size = 50
 text = "100"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="armor_number" type="Label" parent="."]
 offset_left = 604.0
@@ -67,3 +68,8 @@ theme_override_font_sizes/font_size = 50
 text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="tick" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="tick" to="." method="_on_tick_timeout"]

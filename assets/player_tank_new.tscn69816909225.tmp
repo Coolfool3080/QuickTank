@@ -40,13 +40,14 @@ properties/4/path = NodePath("health_sprite/SubViewport/health_bar:value")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_a2myn"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ym7mu"]
 viewport_path = NodePath("health_sprite/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2myn"]
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ym7mu"]
@@ -114,7 +115,7 @@ one_shot = true
 [node name="health_sprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25231, -0.00474453)
 billboard = 1
-texture = SubResource("ViewportTexture_a2myn")
+texture = SubResource("ViewportTexture_ym7mu")
 script = ExtResource("3_ym7mu")
 
 [node name="SubViewport" type="SubViewport" parent="health_sprite"]
@@ -131,12 +132,12 @@ anchor_bottom = 0.5
 offset_left = -96.5
 offset_top = -9.5
 offset_right = 96.5
-offset_bottom = 3.0
+offset_bottom = 9.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_a2myn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ym7mu")
-step = 0.1
+step = 1.0
 value = 100.0
 show_percentage = false
 
@@ -150,11 +151,9 @@ offset_left = -96.0
 offset_top = 3.0
 offset_right = 97.0
 offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_k2uxx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wvj1w")
-step = 0.1
+step = 1.0
 value = 100.0
 show_percentage = false
 
