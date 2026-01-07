@@ -10,10 +10,9 @@ func _ready():
 func _process(_delta):
 	pass
 
-func decrease_hud_health(damage: int):
-	if health_int > 0:
-		health_int -= damage
-		$health_number.text = str(health_int)
+func update_hud_health_and_armor(health: float, armor: float):
+	$health_number.text = str(int(round(health)))
+	$armor_number.text = str(int(round(armor)))
 
 func decrease_hud_ammo():
 	if ammo_int > 0:

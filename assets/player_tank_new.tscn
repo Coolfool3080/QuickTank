@@ -139,7 +139,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_a2myn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ym7mu")
-step = 0.1
+step = 1.0
 value = 100.0
 show_percentage = false
 
@@ -157,7 +157,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_k2uxx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wvj1w")
-step = 0.1
+step = 1.0
 value = 100.0
 show_percentage = false
 

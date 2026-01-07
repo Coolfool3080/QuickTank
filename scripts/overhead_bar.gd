@@ -24,6 +24,9 @@ func take_damage(damage: float):
 		health_value -= health_damage + overflow
 		armor_value = 0
 	
-	$SubViewport/health_bar.value = health_value
-	$SubViewport/armor_bar.value = armor_value
+	player.health = str(int(round(health_value)))
+	player.armor = str(int(round(armor_value)))
+	
+	$SubViewport/health_bar.value = player.health
+	$SubViewport/armor_bar.value = player.armor
 	

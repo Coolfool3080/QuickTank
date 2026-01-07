@@ -1,8 +1,6 @@
 extends CharacterBody3D
 
 @export var Bullet: PackedScene
-@export var health_value: float = 100.0
-@export var armor_value: float = 100.0
 
 @onready var head_node = $head
 @onready var fast_head = $head2
@@ -15,9 +13,12 @@ const MOVE_SPEED = 5.0
 const ROTATION_SPEED = 1.5
 const HEAD_ROTATE_SPEED = 2.0
 
+var health: int = 100
+var armor: int = 100
 var camera_rotation: Vector2 = Vector2.ZERO
 var camera: Node3D
 var hud
+var dead_screen
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(name))
@@ -35,6 +36,8 @@ func _ready():
 		
 		hud = preload("res://assets/tank_hud.tscn").instantiate()
 		get_tree().get_root().add_child(hud)
+		
+		dead_screen = preload("res://assets/dead_screen.tscn").instantiate()
 		#print("Tank spawned. My ID:", multiplayer.get_unique_id())
 		#print("Has authority:", is_multiplayer_authority())
 	
@@ -164,7 +167,7 @@ func _on_body_hitbox_area_entered(area):
 	if area.is_in_group("bullet"):
 		print("bullet hit body")
 		$health_sprite.take_damage(bullet_damage)
-		hud.decrease_hud_health(bullet_damage)
+		hud.update_hud_health_and_armor(health, armor)
 
 func _on_head_hitbox_area_entered(area):
 	if not is_multiplayer_authority():
@@ -172,7 +175,7 @@ func _on_head_hitbox_area_entered(area):
 	if area.is_in_group("bullet"):
 		print("Bullet hit head!")
 		$health_sprite.take_damage(bullet_damage)
-		hud.decrease_hud_health(bullet_damage)
+		hud.update_hud_health_and_armor(health, armor)
 
 func is_dead():
-	return hud.get_node("health_number").text == "0"
+	return health <= 0
