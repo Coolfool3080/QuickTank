@@ -12,6 +12,7 @@ extends CharacterBody3D
 const MOVE_SPEED = 5.0
 const ROTATION_SPEED = 1.5
 const HEAD_ROTATE_SPEED = 2.0
+const RAY_LENGTH = 1000
 
 var health: int = 100
 var armor: int = 100
@@ -70,6 +71,22 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, MOVE_SPEED * 4 * delta)
 	
 	move_and_slide()
+	
+	var space_state = get_world_3d().direct_space_state
+	var mouse_position = get_viewport().get_mouse_position()
+	var cam = get_tree().get_root().get_node("player_camera/camera_yaw/camera_pitch/spring/Camera3D")
+	
+	var origin = cam.project_ray_origin(mouse_position)
+	var end = origin + cam.project_ray_normal(mouse_position) * RAY_LENGTH
+	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	query.collide_with_areas = true
+	
+	var result = space_state.intersect_ray(query)
+	
+	if result:
+		head_barrel.look_at(result.position)
+	else:
+		pass
 	
 	#var camera_global_yaw = camera_pivot.global_transform.basis.get_euler().y
 	#var tank_yaw = global_transform.basis.get_euler().y
