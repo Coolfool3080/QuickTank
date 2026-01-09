@@ -3,9 +3,7 @@ extends CharacterBody3D
 @export var Bullet: PackedScene
 
 @onready var head_node = $head
-@onready var fast_head = $head2
 @onready var head_barrel = $head/head_mesh/barrel_pivot
-@onready var fast_barrel = $head2/barrel_pivot2
 @onready var fire_cooldown_timer = $fire_cooldown_timer
 @onready var player_camera_scene
 

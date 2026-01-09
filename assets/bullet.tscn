@@ -11,9 +11,7 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rcgj2"]
 
-[node name="bullet" type="RigidBody3D"]
-mass = 0.01
-gravity_scale = 0.1
+[node name="bullet" type="CharacterBody3D"]
 script = ExtResource("1_5orsb")
 
 [node name="body" type="MeshInstance3D" parent="."]
@@ -26,7 +24,7 @@ skeleton = NodePath("../CollisionShape3D")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 shape = SubResource("SphereShape3D_hpu58")
 
-[node name="hit_box" type="Area3D" parent="." groups=["bullet", "hit_object"]]
+[node name="hit_box" type="Area3D" parent="." groups=["bullet"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hit_box"]
 transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 0, 0)
