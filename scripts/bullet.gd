@@ -9,8 +9,8 @@ func _ready():
 func _process(delta):
 	move_and_collide(-transform.basis.z * SPEED * delta)
 
-func _on_hit_box_body_entered(body):
-	if body.is_in_group("hit_object"):
+func _on_hit_box_area_entered(area):
+	if area.is_in_group("hit_object"):
 		queue_free()
 
 func _on_bullet_despawn_timer_timeout():
