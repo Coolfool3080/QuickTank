@@ -60,9 +60,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ammo_number" type="Label" parent="."]
-offset_left = 1000.0
+offset_left = 1048.0
 offset_top = 550.0
-offset_right = 1126.0
+offset_right = 1137.0
 offset_bottom = 619.0
 theme_override_font_sizes/font_size = 50
 text = "5"
@@ -71,5 +71,29 @@ vertical_alignment = 1
 
 [node name="tick" type="Timer" parent="."]
 autostart = true
+
+[node name="scoreboard" type="Node2D" parent="."]
+
+[node name="opponent_score" type="Label" parent="scoreboard"]
+offset_left = 22.0
+offset_top = 70.0
+offset_right = 111.0
+offset_bottom = 139.0
+theme_override_colors/font_color = Color(0.78431374, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="player_score" type="Label" parent="scoreboard"]
+offset_left = 22.0
+offset_top = 25.0
+offset_right = 111.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0, 0, 0.78431374, 1)
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="timeout" from="tick" to="." method="_on_tick_timeout"]

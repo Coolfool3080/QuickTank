@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @export var Bullet: PackedScene
+@export var Dead_Screen_Scene: PackedScene
 
 @onready var head_node = $head
 @onready var head_barrel = $head/head_mesh/barrel_pivot
@@ -12,12 +13,14 @@ const ROTATION_SPEED = 1.5
 const HEAD_ROTATE_SPEED = 2.0
 const RAY_LENGTH = 1000
 
+var scene_root
 var health: int = 100
 var armor: int = 100
 var camera_rotation: Vector2 = Vector2.ZERO
 var camera: Node3D
 var hud
-var dead_screen
+var dead_screen: Node = null
+var is_reseting = false
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(name))
@@ -26,6 +29,7 @@ func _ready():
 	if is_multiplayer_authority():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
+		scene_root = get_tree().current_scene
 		player_camera_scene = preload("res://assets/player_camera.tscn")
 		camera = player_camera_scene.instantiate()
 		get_tree().get_root().add_child(camera)
@@ -36,12 +40,15 @@ func _ready():
 		hud = preload("res://assets/tank_hud.tscn").instantiate()
 		get_tree().get_root().add_child(hud)
 		
-		dead_screen = preload("res://assets/dead_screen.tscn").instantiate()
+		Dead_Screen_Scene = preload("res://assets/dead_screen.tscn")
 		#print("Tank spawned. My ID:", multiplayer.get_unique_id())
 		#print("Has authority:", is_multiplayer_authority())
 	
 func _physics_process(delta):
 	if not is_multiplayer_authority():
+		return
+	
+	if is_dead():
 		return
 	
 	if not is_on_floor():
@@ -93,11 +100,11 @@ func _input(event):
 	
 	var ammo_count: int = int(hud.get_node("ammo_number").text)
 		
-	if event.is_action_pressed("shoot") and fire_cooldown_timer.is_stopped() and ammo_count > 0:
+	if event.is_action_pressed("shoot") and fire_cooldown_timer.is_stopped() and ammo_count > 0 and !is_dead():
 		shoot.rpc()
 		hud.decrease_hud_ammo()
 
-var bullet_damage: int = 10
+var bullet_damage: int = 25
 
 @rpc("call_local")
 func shoot():
@@ -110,17 +117,58 @@ func _on_body_hitbox_area_entered(area):
 	if not is_multiplayer_authority():
 		return
 	if area.is_in_group("bullet"):
-		print("bullet hit body")
 		$health_sprite.take_damage(bullet_damage)
 		hud.update_hud_health_and_armor(health, armor)
+		
+		if is_dead() and !is_reseting:
+			die()
+			$respawn_timer.start()
 
 func _on_head_hitbox_area_entered(area):
 	if not is_multiplayer_authority():
 		return
 	if area.is_in_group("bullet"):
-		print("Bullet hit head!")
 		$health_sprite.take_damage(bullet_damage)
 		hud.update_hud_health_and_armor(health, armor)
+		
+		if is_dead() and !is_reseting:
+			die()
+			$respawn_timer.start()
 
 func is_dead():
 	return health <= 0
+
+func die():
+	if is_reseting:
+		return
+	
+	is_reseting = true
+	show_dead_screen()
+
+func respawn():
+	hide_dead_screen()
+	
+	var spawn_points = scene_root.get_tree().get_nodes_in_group("spawn_points")
+	global_position = spawn_points.pick_random().global_position
+	
+	health = 100
+	armor = 100
+	hud.reset()
+	$health_sprite.reset()
+	is_reseting = false
+	
+func show_dead_screen():
+	if is_instance_valid(dead_screen):
+		return
+	
+	dead_screen = Dead_Screen_Scene.instantiate()
+	get_tree().get_root().add_child(dead_screen)
+
+func hide_dead_screen():
+	if is_instance_valid(dead_screen):
+		dead_screen.queue_free()
+		dead_screen = null
+
+func _on_respawn_timer_timeout():
+	respawn()
+	$respawn_timer.stop()

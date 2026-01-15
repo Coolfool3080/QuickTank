@@ -14,6 +14,11 @@ func update_hud_health_and_armor(health: float, armor: float):
 	$health_number.text = str(int(round(health)))
 	$armor_number.text = str(int(round(armor)))
 
+func reset():
+	$health_number.text = "100"
+	$armor_number.text = "100"
+	_ready()
+
 func decrease_hud_ammo():
 	if ammo_int > 0:
 		ammo_int -= 1

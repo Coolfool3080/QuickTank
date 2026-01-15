@@ -15,11 +15,16 @@ run/main_scene="uid://bcq1w4l1qow6p"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [global_group]
 
 hit_object=""
 hit_player=""
 bullet=""
+spawn_points=""
 
 [input]
 

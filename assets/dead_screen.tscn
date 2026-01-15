@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://brlgd47gwnsc1"]
+[gd_scene load_steps=2 format=3 uid="uid://brlgd47gwnsc1"]
+
+[ext_resource type="Script" uid="uid://b0j03htivhpvu" path="res://scripts/dead_screen.gd" id="1_myh8e"]
 
 [node name="dead_screen" type="CanvasLayer"]
+script = ExtResource("1_myh8e")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0
@@ -42,3 +45,7 @@ theme_override_font_sizes/font_size = 30
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

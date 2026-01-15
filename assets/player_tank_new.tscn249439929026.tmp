@@ -169,9 +169,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.649023, 0)
 [node name="barrel_pivot2" type="Node3D" parent="head2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.491493)
 
-[node name="respawn_timer" type="Timer" parent="."]
-wait_time = 3.0
-
 [connection signal="area_entered" from="body_mesh/body_hitbox" to="." method="_on_body_hitbox_area_entered"]
 [connection signal="area_entered" from="head/head_mesh/head_hitbox" to="." method="_on_head_hitbox_area_entered"]
-[connection signal="timeout" from="respawn_timer" to="." method="_on_respawn_timer_timeout"]

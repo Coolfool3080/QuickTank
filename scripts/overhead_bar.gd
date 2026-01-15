@@ -29,4 +29,8 @@ func take_damage(damage: float):
 	
 	$SubViewport/health_bar.value = player.health
 	$SubViewport/armor_bar.value = player.armor
-	
+
+func reset():
+	$SubViewport/health_bar.value = 100.0
+	$SubViewport/armor_bar.value = 100.0
+	_ready()
