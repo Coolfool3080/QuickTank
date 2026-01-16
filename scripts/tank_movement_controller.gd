@@ -21,6 +21,8 @@ var camera: Node3D
 var hud
 var dead_screen: Node = null
 var is_reseting = false
+var kill_count = 0
+var enemy_kill_count = 0
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(name))
@@ -28,6 +30,7 @@ func _enter_tree() -> void:
 func _ready():
 	if is_multiplayer_authority():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		print(name)
 		
 		scene_root = get_tree().current_scene
 		player_camera_scene = preload("res://assets/player_camera.tscn")
@@ -111,6 +114,7 @@ func shoot():
 	var bullet = Bullet.instantiate()
 	bullet.global_transform = $head/head_mesh/barrel_pivot/barrel_mesh/bullet_spawn_point.global_transform
 	get_tree().current_scene.add_child(bullet)
+	bullet.shooter = name
 	fire_cooldown_timer.start()
 
 func _on_body_hitbox_area_entered(area):
@@ -123,6 +127,11 @@ func _on_body_hitbox_area_entered(area):
 		if is_dead() and !is_reseting:
 			die()
 			$respawn_timer.start()
+			#area.get_tree().get_root().add_enemy_point()
+			if name != area.get_parent().shooter:
+				add_enemy_point()
+				print(name)
+				print(kill_count)
 
 func _on_head_hitbox_area_entered(area):
 	if not is_multiplayer_authority():
@@ -134,6 +143,8 @@ func _on_head_hitbox_area_entered(area):
 		if is_dead() and !is_reseting:
 			die()
 			$respawn_timer.start()
+			area.get_tree().get_root().add_enemy_point()
+			print(kill_count)
 
 func is_dead():
 	return health <= 0
@@ -172,3 +183,6 @@ func hide_dead_screen():
 func _on_respawn_timer_timeout():
 	respawn()
 	$respawn_timer.stop()
+
+func add_enemy_point():
+	kill_count += 1

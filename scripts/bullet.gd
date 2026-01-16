@@ -4,9 +4,11 @@ extends CharacterBody3D
 
 var damage = 10
 var has_bounced = false
+var shooter
 
 func _ready():
 	velocity = -transform.basis.z * SPEED
+	
 
 func _process(delta):
 	var collision = move_and_collide(velocity * delta)
